@@ -24,7 +24,7 @@ jobs:
       - name: 'Install Dependencies'
         run: npm install
 
-      - name: 'Run Linter'
+      - name: 'Run Tests'
         run: npx nx test test-lib
   # Run the linter to check for code style issues
   lint:
