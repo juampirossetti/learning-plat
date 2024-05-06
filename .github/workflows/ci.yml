@@ -6,7 +6,34 @@ on:
   pull_request:
 
 jobs:
-  main:
+  test:
+    name: 'Run tests'
+    defaults:
+      run:
+        shell: bash
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello GitHub Actions!"
+      - uses: actions/checkout@v4
+        name: 'Checkout repository'
+
+      - name: 'Install Dependencies'
+        run: npm install
+
+      - name: 'Run Tests'
+        run: npx nx test test-lib
+  # Run the linter to check for code style issues
+  lint:
+    name: 'Run linter'
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: 'Checkout repository'
+
+      - name: 'Install Dependencies'
+        run: npm install
+
+      - name: 'Run Linter'
+        run: npx nx run-many --all --skip-nx-cache --parallel --targets=lint
