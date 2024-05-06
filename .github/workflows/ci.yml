@@ -10,6 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello GitHub Actions!"
+  # Run unit tests to be sure that everything works fine
+  test:
+    name: 'Run tests'
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        name: 'Checkout repository'
+
+      - name: 'Install Dependencies'
+        run: npm install
+
+      - name: 'Run Linter'
+        run: npx nx test test-lib
   # Run the linter to check for code style issues
   lint:
     name: 'Run linter'
@@ -25,4 +41,4 @@ jobs:
         run: npm install
 
       - name: 'Run Linter'
-        run: npx nx test test-lib
+        run: npx nx run-many --all --skip-nx-cache --parallel --targets=lint
