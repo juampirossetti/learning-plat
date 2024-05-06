@@ -1,7 +1,7 @@
-import { testLib } from './test-lib';
+import { someFunction } from './test-lib';
 
-describe('testLib', () => {
+describe('someFunction', () => {
   it('should work', () => {
-    expect(testLib()).toEqual('test-lib');
+    expect(someFunction()).toEqual('some function');
   });
 });
