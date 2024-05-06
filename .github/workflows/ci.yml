@@ -6,11 +6,6 @@ on:
   pull_request:
 
 jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Hello GitHub Actions!"
-  # Run unit tests to be sure that everything works fine
   test:
     name: 'Run tests'
     defaults:
