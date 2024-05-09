@@ -6,14 +6,17 @@
 import express from 'express';
 import loaders from './loaders';
 import logger from './logger';
-
-async function initiateServer() {
-  const app = express();
-  const port = process.env.PORT || 4444;
+import http from 'http';
+async function initiateServer(): Promise<{
+  app: express.Express;
+  server: http.Server;
+}> {
+  const app: express.Express = express();
+  const port: number = Number(process.env.PORT) || 4444;
 
   await loaders(app);
 
-  const server = app.listen(port, () => {
+  const server: http.Server = app.listen(port, () => {
     logger.info(`Server listening on port: ${port}`);
   });
 
