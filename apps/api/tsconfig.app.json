@@ -1,10 +1,17 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "target": "ES2022",
     "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
+    "module": "ES2022",
     "types": ["node", "express"]
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/routes/auth.js",
+    "src/loaders/express.js",
+    "src/loaders/database.js",
+    "src/config/index.js"
+  ]
 }

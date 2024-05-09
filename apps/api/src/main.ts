@@ -4,19 +4,22 @@
  */
 
 import express from 'express';
-import * as path from 'path';
-import { someFunction } from '@learning-plat/test-lib';
+import loaders from './loaders';
+import logger from './logger';
 
-const app = express();
+async function initiateServer() {
+  const app = express();
+  const port = process.env.PORT || 4444;
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+  await loaders(app);
 
-app.get('/api', (req, res) => {
-  res.send({ message: `Welcome to my-express-app! ${someFunction()}` });
-});
+  const server = app.listen(port, () => {
+    logger.info(`Server listening on port: ${port}`);
+  });
 
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
+  return { app, server };
+}
+
+const { app, server } = await initiateServer();
+
+export default { app, server };
