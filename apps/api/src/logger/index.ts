@@ -1,8 +1,8 @@
-import winston, { format, transports } from 'winston';
+import winston, { format, transports, Logger } from 'winston';
 import config from '../config';
 import { isProduction } from '../helpers';
 
-const formatters = [
+const formatters: winston.Logform.Format[] = [
   format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   format.simple(),
   format.printf(
@@ -14,7 +14,10 @@ const formatters = [
 const createConsoleTransport = () =>
   new transports.Console({ silent: isProduction() });
 
-const createFileTransport = (filename = null, level = config.LOGS.LEVEL) =>
+const createFileTransport = (
+  filename: string | null = null,
+  level: string = config.LOGS.LEVEL
+) =>
   new transports.File({
     filename: `dupai${filename ? `-${filename}.log` : '.log'}`,
     level,
@@ -23,7 +26,7 @@ const createFileTransport = (filename = null, level = config.LOGS.LEVEL) =>
     maxsize: config.LOGS.FILE_SIZE,
   });
 
-const logger = winston.createLogger({
+const logger: Logger = winston.createLogger({
   format: format.combine(...formatters),
   transports: [
     createConsoleTransport(),

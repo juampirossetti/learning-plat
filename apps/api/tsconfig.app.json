@@ -7,11 +7,5 @@
     "types": ["node", "express"]
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": [
-    "src/**/*.ts",
-    "src/routes/auth.js",
-    "src/loaders/express.js",
-    "src/loaders/database.js",
-    "src/config/index.js"
-  ]
+  "include": ["src/**/*.ts", "src/routes/auth.ts", "src/loaders/express.ts"]
 }
